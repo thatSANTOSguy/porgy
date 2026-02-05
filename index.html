@@ -37,6 +37,36 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Floating Secret Button */
+        .secret-btn {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ff00ff, #00ffff);
+            border: 3px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            animation: glow 2s infinite alternate;
+            z-index: 1;
+        }
+        
+        .secret-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); }
+            to { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
         }
         
         #landing h1 {
@@ -45,6 +75,8 @@
             letter-spacing: 15px;
             margin-bottom: 30px;
             text-shadow: 3px 3px 0 #ccc;
+            position: relative;
+            z-index: 10;
         }
         
         .enter {
@@ -52,6 +84,8 @@
             text-decoration: underline;
             cursor: pointer;
             animation: blink 1.5s infinite;
+            position: relative;
+            z-index: 10;
         }
         
         @keyframes blink {
@@ -289,6 +323,11 @@
     <div id="landing" class="screen active">
         <h1>PORGY</h1>
         <div class="enter" onclick="nav('menu')">CLICK TO ENTER</div>
+        <!-- Secret Floating Button -->
+        <div class="secret-btn" id="secretBtn" onclick="secretDownload()">
+            <!-- REPLACE WITH: <img src="path/to/secret.gif" alt="Secret" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"> -->
+            ?
+        </div>
     </div>
     
     <!-- Menu Screen -->
@@ -371,6 +410,82 @@ Like finding an old NFO file in a torrent from 2003...
     <script>
         const audio = document.getElementById('audio');
         const status = document.getElementById('status');
+        
+        // DVD Screensaver Logic
+        const secretBtn = document.getElementById('secretBtn');
+        let x = Math.random() * (window.innerWidth - 60);
+        let y = Math.random() * (window.innerHeight - 60);
+        const speed = 80; // pixels per second
+        let dx = 1;
+        let dy = 1;
+        const btnSize = 60;
+        let lastTime = performance.now();
+        
+        function moveSecret(currentTime) {
+            const landing = document.getElementById('landing');
+            if (!landing.classList.contains('active')) {
+                requestAnimationFrame(moveSecret);
+                return;
+            }
+            
+            // Calculate time delta
+            const deltaTime = (currentTime - lastTime) / 1000; // convert to seconds
+            lastTime = currentTime;
+            
+            // Calculate movement based on time, not frames
+            const distance = speed * deltaTime;
+            
+            x += dx * distance;
+            y += dy * distance;
+            
+            // Bounce off edges
+            if (x + btnSize >= window.innerWidth || x <= 0) {
+                dx = -dx;
+                x = Math.max(0, Math.min(x, window.innerWidth - btnSize));
+                changeColor();
+            }
+            if (y + btnSize >= window.innerHeight || y <= 0) {
+                dy = -dy;
+                y = Math.max(0, Math.min(y, window.innerHeight - btnSize));
+                changeColor();
+            }
+            
+            secretBtn.style.left = x + 'px';
+            secretBtn.style.top = y + 'px';
+            
+            requestAnimationFrame(moveSecret);
+        }
+        
+        function changeColor() {
+            const colors = [
+                'linear-gradient(135deg, #ff00ff, #00ffff)',
+                'linear-gradient(135deg, #ff0000, #ffff00)',
+                'linear-gradient(135deg, #00ff00, #0000ff)',
+                'linear-gradient(135deg, #ff00ff, #ffff00)',
+                'linear-gradient(135deg, #00ffff, #ff0000)'
+            ];
+            secretBtn.style.background = colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // Start DVD movement
+        requestAnimationFrame(moveSecret);
+        
+        function secretDownload() {
+            // REPLACE WITH YOUR SECRET DOWNLOAD LINK
+            const secretURL = 'https://example.com/secret-album.zip';
+            
+            // Show a little easter egg message
+            alert('🎉 You found the secret! Downloading...');
+            
+            // Trigger download
+            window.location.href = secretURL;
+            
+            // OR use this method for better control:
+            // const a = document.createElement('a');
+            // a.href = secretURL;
+            // a.download = 'PORGY-Secret-Album.zip';
+            // a.click();
+        }
         
         function nav(screen) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
