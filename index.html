@@ -298,6 +298,74 @@
             white-space: pre-wrap;
         }
         
+        /* Secret Download Page */
+        #secret {
+            background: #000;
+            color: #0f0;
+            font-family: 'VT323', monospace;
+            justify-content: center;
+            align-items: center;
+            overflow-y: auto;
+        }
+        
+        .secret-container {
+            max-width: 600px;
+            padding: 40px;
+            text-align: center;
+            border: 3px solid #0f0;
+            background: #000;
+            box-shadow: 0 0 50px rgba(0, 255, 0, 0.3);
+        }
+        
+        .secret-container h2 {
+            font-size: clamp(36px, 8vw, 56px);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #0f0;
+            animation: flicker 3s infinite;
+        }
+        
+        .secret-container p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        
+        .secret-ascii {
+            font-size: 12px;
+            margin: 30px 0;
+            opacity: 0.7;
+        }
+        
+        .download-link {
+            display: inline-block;
+            background: #0f0;
+            color: #000;
+            padding: 15px 40px;
+            margin: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+            border: 2px solid #0f0;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            transition: all 0.3s;
+        }
+        
+        .download-link:hover {
+            background: #000;
+            color: #0f0;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+        }
+        
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            41.99% { opacity: 1; }
+            42% { opacity: 0.8; }
+            43% { opacity: 1; }
+            45.99% { opacity: 1; }
+            46% { opacity: 0.6; }
+            46.5% { opacity: 1; }
+        }
+        
         /* Responsive */
         @media (max-width: 480px) {
             .btn {
@@ -407,6 +475,27 @@ Like finding an old NFO file in a torrent from 2003...
         </div>
     </div>
     
+    <!-- Secret Download Page -->
+    <div id="secret" class="screen">
+        <div class="secret-container">
+            <h2>YOU FOUND IT</h2>
+            <div class="secret-ascii">
+⠀⠀⠀⠀⠀⣀⣤⣴⣶⣾⣿⣿⣿⣿⣷⣶⣦⣤⣀⠀⠀⠀⠀⠀
+⠀⠀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⣄⠀⠀
+⢀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡀
+⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷
+            </div>
+            <p>Congratulations on your curiosity.</p>
+            <p>Here's something special for those who pay attention.</p>
+            <p>Enjoy.</p>
+            
+            <!-- REPLACE WITH SECRET DOWNLOAD LINK -->
+            <a href="#" class="download-link" id="secretDownloadLink">DOWNLOAD</a>
+            
+            <button class="btn" onclick="nav('landing')" style="margin-top: 30px;">← Back to Start</button>
+        </div>
+    </div>
+    
     <script>
         const audio = document.getElementById('audio');
         const status = document.getElementById('status');
@@ -471,20 +560,8 @@ Like finding an old NFO file in a torrent from 2003...
         requestAnimationFrame(moveSecret);
         
         function secretDownload() {
-            // REPLACE WITH YOUR SECRET DOWNLOAD LINK
-            const secretURL = 'https://example.com/secret-album.zip';
-            
-            // Show a little easter egg message
-            alert('🎉 You found the secret! Downloading...');
-            
-            // Trigger download
-            window.location.href = secretURL;
-            
-            // OR use this method for better control:
-            // const a = document.createElement('a');
-            // a.href = secretURL;
-            // a.download = 'PORGY-Secret-Album.zip';
-            // a.click();
+            // Navigate to secret page instead of direct download
+            nav('secret');
         }
         
         function nav(screen) {
