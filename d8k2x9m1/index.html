@@ -1,1 +1,140 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="PORGY - Album Download">
+    <title>PORGY - Download</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier Prime', monospace;
+            background: #000080;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: #c0c0c0;
+            border: 3px outset #dfdfdf;
+            padding: 40px;
+            color: #000;
+        }
+        
+        h1 {
+            font-size: clamp(28px, 6vw, 36px);
+            margin-bottom: 20px;
+            border-bottom: 2px solid #808080;
+            padding-bottom: 10px;
+        }
+        
+        p {
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        
+        .album-cover {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .album-cover img {
+            width: 100%;
+            max-width: 250px;
+            height: auto;
+            aspect-ratio: 1;
+            border: 2px solid #808080;
+            object-fit: cover;
+        }
+        
+        .album-info {
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+        
+        .download-btn {
+            background: #008000;
+            color: #fff;
+            border: 2px outset #0f0;
+            padding: 15px 30px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            text-decoration: none;
+            text-align: center;
+            transition: background 0.1s;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .download-btn:hover {
+            background: #009000;
+        }
+        
+        .download-btn:active {
+            border-style: inset;
+        }
+        
+        .support-text {
+            margin-top: 30px;
+            font-size: 12px;
+            opacity: 0.7;
+            line-height: 1.6;
+            text-align: center;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            .download-btn {
+                font-size: 16px;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>THANK YOU</h1>
+        
+        <p>Thank you for supporting the music. Your download is ready below.</p>
+        
+        <div class="album-cover">
+            <img src="../IMG_7121.jpeg" alt="PORGY Album Cover">
+        </div>
+        
+        <div class="album-info">
+            <strong>PORGY - Full Album</strong><br>
+            High quality WAV files included.
+        </div>
+        
+        <!-- ALBUM DOWNLOAD LINK -->
+        <a href="https://github.com/thatSANTOSguy/porgy/releases/download/album-release/PORGY.zip" class="download-btn" id="downloadLink" download>DOWNLOAD ALBUM</a>
+        
+        <p class="support-text">
+            Having issues? Re-download anytime using this link.
+        </p>
+    </div>
+</body>
+</html>
