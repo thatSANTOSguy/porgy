@@ -44,29 +44,25 @@
         /* Floating Secret Button */
         .secret-btn {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #ff00ff, #00ffff);
-            border: 3px solid #fff;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+            width: 70px;
+            height: 70px;
+            background: transparent;
+            border: none;
+            cursor: default;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            animation: glow 2s infinite alternate;
             z-index: 1;
         }
         
-        .secret-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8);
-        }
-        
-        @keyframes glow {
-            from { box-shadow: 0 0 20px rgba(255, 0, 255, 0.5); }
-            to { box-shadow: 0 0 40px rgba(0, 255, 255, 0.8); }
+        .secret-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            pointer-events: none;
+            filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.5));
+            transition: filter 0.3s;
         }
         
         #landing h1 {
@@ -393,7 +389,7 @@
         <div class="enter" onclick="nav('menu')">CLICK TO ENTER</div>
         <!-- Secret Floating Button -->
         <div class="secret-btn" id="secretBtn" onclick="secretDownload()">
-            <img src="IMG_7122.png" alt="Secret" style="width:100%;height:100%;border-radius:50%;object-fit:cover;">
+            <img src="IMG_7122.png" alt="Secret">
         </div>
     </div>
     
@@ -445,7 +441,7 @@
                 <div id="status">Press PLAY to start</div>
             </div>
             <audio id="audio" preload="metadata">
-                <source src="THEREALINITIATION (D1INSTRU).mp3" type="audio/mpeg">
+                <source src="THEREALINITIATION%20(D1INSTRU).mp3" type="audio/mpeg">
             </audio>
             <div class="player-controls">
                 <button class="player-btn" onclick="play()" aria-label="Play">▶</button>
@@ -498,13 +494,14 @@ Special thanks to Live At Canobert, Salpa & Uma for being a big part of this rec
         
         // DVD Screensaver Logic
         const secretBtn = document.getElementById('secretBtn');
-        let x = Math.random() * (window.innerWidth - 60);
-        let y = Math.random() * (window.innerHeight - 60);
+        let x = Math.random() * (window.innerWidth - 70);
+        let y = Math.random() * (window.innerHeight - 70);
         const speed = 80; // pixels per second
         let dx = 1;
         let dy = 1;
-        const btnSize = 60;
+        const btnSize = 70;
         let lastTime = performance.now();
+        let currentGlow = 'rgba(255, 0, 255, 0.5)';
         
         function moveSecret(currentTime) {
             const landing = document.getElementById('landing');
@@ -523,16 +520,16 @@ Special thanks to Live At Canobert, Salpa & Uma for being a big part of this rec
             x += dx * distance;
             y += dy * distance;
             
-            // Bounce off edges
+            // Bounce off edges and change glow color
             if (x + btnSize >= window.innerWidth || x <= 0) {
                 dx = -dx;
                 x = Math.max(0, Math.min(x, window.innerWidth - btnSize));
-                changeColor();
+                changeGlow();
             }
             if (y + btnSize >= window.innerHeight || y <= 0) {
                 dy = -dy;
                 y = Math.max(0, Math.min(y, window.innerHeight - btnSize));
-                changeColor();
+                changeGlow();
             }
             
             secretBtn.style.left = x + 'px';
@@ -541,15 +538,18 @@ Special thanks to Live At Canobert, Salpa & Uma for being a big part of this rec
             requestAnimationFrame(moveSecret);
         }
         
-        function changeColor() {
-            const colors = [
-                'linear-gradient(135deg, #ff00ff, #00ffff)',
-                'linear-gradient(135deg, #ff0000, #ffff00)',
-                'linear-gradient(135deg, #00ff00, #0000ff)',
-                'linear-gradient(135deg, #ff00ff, #ffff00)',
-                'linear-gradient(135deg, #00ffff, #ff0000)'
+        function changeGlow() {
+            const glows = [
+                'rgba(255, 0, 255, 0.5)',
+                'rgba(255, 0, 0, 0.5)',
+                'rgba(0, 255, 0, 0.5)',
+                'rgba(0, 0, 255, 0.5)',
+                'rgba(0, 255, 255, 0.5)',
+                'rgba(255, 255, 0, 0.5)'
             ];
-            secretBtn.style.background = colors[Math.floor(Math.random() * colors.length)];
+            currentGlow = glows[Math.floor(Math.random() * glows.length)];
+            const img = secretBtn.querySelector('img');
+            img.style.filter = `drop-shadow(0 0 20px ${currentGlow})`;
         }
         
         // Start DVD movement
