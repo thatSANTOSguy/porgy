@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: /d8k2x9m1/
