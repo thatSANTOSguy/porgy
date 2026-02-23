@@ -7,7 +7,7 @@
     <title>PORGY</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=VT323&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -66,11 +66,12 @@
         }
         
         #landing h1 {
-            font-family: 'VT323', monospace;
+            font-family: 'Cinzel', serif;
             font-size: clamp(60px, 15vw, 120px);
-            letter-spacing: 15px;
+            font-weight: 400;
+            letter-spacing: 8px;
             margin-bottom: 30px;
-            text-shadow: 3px 3px 0 #ccc;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 10;
         }
@@ -399,6 +400,7 @@
         <button class="btn" onclick="nav('buy')">Buy Full Album</button>
         <button class="btn" onclick="nav('preview')">Preview</button>
         <button class="btn" onclick="nav('readme')">Read Me</button>
+        <button class="btn" onclick="nav('landing')" style="margin-top: 20px;">← Back</button>
     </div>
     
     <!-- Buy Page -->
